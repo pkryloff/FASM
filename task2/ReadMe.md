@@ -4,7 +4,7 @@
 
 # Тест 1
 Попытка ввода размера массива 0
-![alt-текст](https://github.com/pkryloff/FASM/blob/main/task2/screen/1null.png "Zerro")
+![alt-текст](https://github.com/pkryloff/FASM/blob/main/task2/screen/1zero.png "Zerro")
 
 # Тест 2
 Попытка ввода отрицательного размера массива
