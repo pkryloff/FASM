@@ -11,21 +11,25 @@ section '.code' code readable executable
     mov ecx, 0
     sin_loop:
     inc ecx
+    ; delta *= x / i;
     fld QWORD[x]
     mov [i], ecx
     fidiv dword[i]
     fmul QWORD[delta]
     fstp QWORD[delta]
 
+    ; i % 2 == 0
     mov eax, ecx
     and eax, 1
     cmp eax, 0
     je sin_loop
 
+    ; res += delta;
     fld QWORD[delta]
     fadd QWORD[sinres]
     fstp QWORD[sinres]
 
+    ; delta *= -1;
     fld QWORD[delta]
     fchs
     fstp QWORD[delta]
@@ -38,6 +42,7 @@ section '.code' code readable executable
   cos:
     finit
     fld1
+    ; res = 1.0;
     fst QWORD[cosres]
     fchs
     fstp QWORD[delta]
@@ -45,21 +50,25 @@ section '.code' code readable executable
     mov ecx, 0
     cos_loop:
     inc ecx
+    ; delta *= x / i;
     fld QWORD[x]
     mov [i], ecx
     fidiv dword[i]
     fmul QWORD[delta]
     fstp QWORD[delta]
 
+    ; i % 2 != 0
     mov eax, ecx
     and eax, 1
     cmp eax, 0
     jne cos_loop
 
+    ; res += delta;
     fld QWORD[delta]
     fadd QWORD[cosres]
     fstp QWORD[cosres]
 
+    ; delta *= -1;
     fld QWORD[delta]
     fchs
     fstp QWORD[delta]
